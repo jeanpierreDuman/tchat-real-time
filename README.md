@@ -1,0 +1,1 @@
+Le répertoire /bin contient le serveur qu'il faut appeler pour faire marcher le server et la classe Tchat !

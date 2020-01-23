@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <script
+			  src="https://code.jquery.com/jquery-3.4.1.js"
+			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+			  crossorigin="anonymous"></script>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="">
+            <span>Message : </span>
+            <input id="contentMessage" type="text" name="" value=""><br><br>
+            <input id="buttonMessage" type="submit" value="send">
+        </div>
+        <hr>
+        <div id="listMessage">
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var conn = new WebSocket('ws://localhost:9999');
+
+        $("#buttonMessage").click(function() {
+            var content = $("#contentMessage").val();
+            console.log(content);
+            $("#contentMessage").val("");
+            $("#contentMessage").focus();
+
+            conn.send(content);
+
+            return false;
+        });
+
+        conn.onmessage = function (e) {
+            $("#listMessage").append("<div>" + e.data + "</div>");
+        }
+
+    });
+</script>
